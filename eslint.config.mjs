@@ -13,5 +13,6 @@ export default defineConfig({
   },
   rules: {
     // Add custom rules if needed
+    "no-console": "off"
   }
 });
