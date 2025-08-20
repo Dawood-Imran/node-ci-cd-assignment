@@ -2,11 +2,12 @@
   "name": "simple_node_project",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-  "start": "node index.js",
-  "lint": "eslint .",
-  "test": "jest",
-  "build": "echo 'Build complete' && mkdir -p dist && cp index.js dist/ && cp package.json dist/"
+    "start": "node index.js",
+    "lint": "eslint .",
+    "test": "jest",
+    "build": "echo 'Build complete' && mkdir -p dist && cp index.js dist/ && cp package.json dist/"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,6 @@
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "eslint": "^9.33.0",
-    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
     "jest": "^30.0.5"
   }
