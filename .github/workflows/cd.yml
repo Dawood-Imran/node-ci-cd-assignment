@@ -16,27 +16,26 @@ jobs:
       APP_ENV: production  # Another env var example
 
     steps:
-    - name: Download artifact
-      uses: actions/github-script@v7
-      with:
-        script: |
-          let artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             run_id: ${{ github.event.workflow_run.id }},
-          });
-          let matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-            return artifact.name == "build-artifact"
-          })[0];
-          let download = await github.rest.actions.downloadArtifact({
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             artifact_id: matchArtifact.id,
-             archive_format: 'zip',
-          });
-          let fs = require('fs');
-          fs.writeFileSync('${{github.workspace}}/build-artifact.zip', Buffer.from(download.data));
+- name: Download artifact
+  uses: actions/download-artifact@v4
+  with:
+    name: build-artifact
+    path: ${{ github.workspace }}
 
+- name: Unzip artifact
+  run: unzip build-artifact.zip -d deployed-app
+
+- name: Install dependencies in deployed app
+  run: |
+    cd deployed-app
+    npm install --production
+
+- name: Start the application
+  run: |
+    cd deployed-app
+    nohup node index.js &
+  env:
+    PORT: ${{ env.PORT }}
     - name: Unzip artifact
       run: unzip build-artifact.zip -d deployed-app
 
