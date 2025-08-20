@@ -4,11 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "lint": "eslint .",
-    "test": "jest",
-    "build": "echo 'Build complete' && mkdir -p dist && cp index.js dist/ && cp package.json dist/"
-  },
+  "start": "node index.js",
+  "lint": "eslint .",
+  "test": "jest",
+  "build": "echo Build complete && if not exist dist mkdir dist && copy index.js dist\\ && copy package.json dist\\"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
