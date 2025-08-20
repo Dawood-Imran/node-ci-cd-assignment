@@ -16,26 +16,12 @@ jobs:
       APP_ENV: production  # Another env var example
 
     steps:
-- name: Download artifact
-  uses: actions/download-artifact@v4
-  with:
-    name: build-artifact
-    path: ${{ github.workspace }}
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifact
+        path: ${{ github.workspace }}
 
-- name: Unzip artifact
-  run: unzip build-artifact.zip -d deployed-app
-
-- name: Install dependencies in deployed app
-  run: |
-    cd deployed-app
-    npm install --production
-
-- name: Start the application
-  run: |
-    cd deployed-app
-    nohup node index.js &
-  env:
-    PORT: ${{ env.PORT }}
     - name: Unzip artifact
       run: unzip build-artifact.zip -d deployed-app
 
